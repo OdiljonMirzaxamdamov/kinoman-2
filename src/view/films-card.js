@@ -1,22 +1,34 @@
 import AbstractView from "./abstract.js";
+import {formatDurationFilmDate, formatYear} from "../utils/film-card.js";
 
 const createFilmsCardTemplate = (filmCard) => {
-  const {poster, releaseDate, title, rating, duration, description, genres, comments, isFavorite, isToWatchList, isWatched} = filmCard;
-
-  const filmCardReleaseDate = releaseDate.toLocaleString(`en-GB`, {year: `numeric`});
+  const {
+    poster,
+    releaseDate,
+    title,
+    rating,
+    duration,
+    description,
+    genres,
+    comments,
+    isFavorite,
+    isToWatchList,
+    isWatched,
+  } = filmCard;
 
   const watchListClass = isToWatchList ? `film-card__controls-item--active` : ``;
   const isWatchedClass = isWatched ? `film-card__controls-item--active` : ``;
   const isFavoriteClass = isFavorite ? `film-card__controls-item--active` : ``;
 
   const commentsCount = comments.length;
+  const release = formatYear(releaseDate);
 
   return `<article class="film-card">
       <h3 class="film-card__title">${title}</h3>
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${filmCardReleaseDate}</span>
-        <span class="film-card__duration">${duration}</span>
+        <span class="film-card__year">${release}</span>
+        <span class="film-card__duration">${formatDurationFilmDate(duration)}</span>
         <span class="film-card__genre">${genres[0]}</span>
       </p>
       <img src="./images/posters/${poster}" alt="" class="film-card__poster">

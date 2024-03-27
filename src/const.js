@@ -6,17 +6,15 @@ export const MIN_COMMENTS_COUNT = 0;
 export const MAX_COMMENTS_COUNT = 5;
 
 export const FilmsDuration = {
-  HOUR_MAX: 3,
-  HOUR_MIN: 1,
-  MINUTES_MAX: 59,
-  MINUTES_MIN: 20
+  MINUTES_MAX: 220,
+  MINUTES_MIN: 40
 };
 
 export const COMMENT_EMOJIS = [
-  `smile.png`,
-  `sleeping.png`,
-  `puke.png`,
-  `angry.png`
+  `smile`,
+  `sleeping`,
+  `puke`,
+  `angry`
 ];
 
 export const COMMENT_USERS = [
@@ -148,3 +146,36 @@ export const FilmsType = {
 
 
 export const EMOJIS = [`angry`, `puke`, `sleeping`, `smile`];
+
+
+export const DateFormats = {
+  YEAR: `YYYY`,
+  DMY: `DD MMMM YYYY`,
+};
+
+
+export const UserAction = {
+  UPDATE: `UPDATE_FILM`,
+  ADD: `ADD_COMMENT`,
+  DELETE: `DELETE_COMMENT`
+};
+
+export const UpdateType = {
+  PATCH: `PATCH`,
+  MINOR: `MINOR`,
+  MAJOR: `MAJOR`
+};
+
+
+export const FilterType = {
+  ALL: `allmovies`,
+  WATCHLIST: `watchlist`,
+  HISTORY: `history`,
+  FAVORITES: `favorites`
+};
+
+export const userGradeSettings = {
+  'Novice': {min: 1, max: 10},
+  'Fan': {min: 11, max: 20},
+  'Movie buff': {min: 21, max: Infinity}
+};

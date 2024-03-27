@@ -1,21 +1,21 @@
+import he from "he";
 import {EMOJIS} from "../const.js";
+import {formatCommentDate} from "../utils/film-card.js";
 
 const createCommentItems = (items) => {
   return items.reduce((result, item) => {
-    const {emoji, text, author, day} = item;
-
-    const commentDayFormat = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`, hour: `numeric`, minute: `numeric`});
+    const {id, emoji, text, author, day} = item;
 
     result += `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
-        <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
+        <img src="./images/emoji/${emoji}.png" width="55" height="55" alt="emoji-smile">
       </span>
       <div>
         <p class="film-details__comment-text">${text}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${commentDayFormat}</span>
-          <button class="film-details__comment-delete">Delete</button>
+          <span class="film-details__comment-day">${formatCommentDate(day)}</span>
+          <button class="film-details__comment-delete" data-comment-id = "${id}">Delete</button>
         </p>
         </div>
     </li>`;
@@ -39,7 +39,7 @@ const createEmojiListTemplate = (emotion) => {
   )).join(``);
 };
 
-export const createCommentsTemplate = (comments, isEmoji, emoji) => {
+export const createCommentsTemplate = (comments, emoji, text) => {
   const commentMarkup = createCommentItems(comments);
   const emojiListMarkup = createEmojiListTemplate();
 
@@ -51,9 +51,9 @@ export const createCommentsTemplate = (comments, isEmoji, emoji) => {
   </ul>
   <div class="film-details__new-comment">
     <div for="add-emoji" class="film-details__add-emoji-label">
-    ${isEmoji ? `<img src="images/emoji/${emoji}.png" width="55" height="55" alt="emoji-${emoji}">` : ``}</div>
+    ${emoji ? `<img src="images/emoji/${emoji}.png" width="55" height="55" alt="emoji-${emoji}">` : ``}</div>
     <label class="film-details__comment-label">
-      <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
+      <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment">${he.encode(text)}</textarea>
     </label>
     <div class="film-details__emoji-list">
     ${emojiListMarkup}
